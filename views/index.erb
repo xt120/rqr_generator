@@ -7,10 +7,7 @@
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-  <!-- Fondo principal -->
-  <div id="background"></div>
-
-  <!-- Contenedor principal -->
+  <div id="galaxy-background"></div>
   <div class="container">
     <h1>Generador de Códigos QR</h1>
     <form id="qr-form">
@@ -27,13 +24,13 @@
       </div>
 
       <label for="logo">Logo (opcional):</label>
-      <input type="file" id="logo" name="logo" accept="image/*">
+      <input type="file" id="logo" name="logo">
 
       <button type="submit">Generar QR</button>
     </form>
   </div>
 
-  <!-- Indicador de carga -->
+    <!-- Indicador de carga -->
   <div id="loading-spinner" class="spinner" style="display: none;">
     <div class="spinner-icon"></div>
     <p>Generando...</p>
@@ -51,6 +48,7 @@
       </div>
     </div>
   </div>
+
 
   <script src="/script.js"></script>
 </body>
