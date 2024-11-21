@@ -87,9 +87,10 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("qr-form").addEventListener("submit", async (e) => {
     e.preventDefault();
   
-    // Mostrar el spinner
-    document.getElementById("loading-spinner").style.display = "block";
-  
+    // Mostrar el indicador de carga
+    const loadingSpinner = document.getElementById("loading-spinner");
+    loadingSpinner.style.display = "flex";
+
     const formData = new FormData(e.target);
     const colorInputs = document.querySelectorAll("input[name='colors[]']");
     const colors = Array.from(colorInputs).map((input) => input.value);
@@ -109,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Error al generar el QR. Intenta nuevamente.");
     } finally {
       // Ocultar el spinner
-      document.getElementById("loading-spinner").style.display = "none";
+      loadingSpinner.style.display = "none";
     }
   });  
 });
