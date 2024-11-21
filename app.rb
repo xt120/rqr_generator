@@ -1,3 +1,4 @@
+require 'bundler/setup'
 require 'sinatra'
 require 'rqrcode'
 require 'chunky_png'
