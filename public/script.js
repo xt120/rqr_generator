@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const downloadPngButton = document.getElementById("download-png");
   const downloadSvgButton = document.getElementById("download-svg");
 
+  const form = document.getElementById("qr-form");
+
   // Límite máximo de colores
   const MAX_COLORS = 10;
 
@@ -71,23 +73,43 @@ document.addEventListener("DOMContentLoaded", () => {
     qrModal.style.display = "none";
   });
 
+  // Resetear el formulario sin recargar la página
+  const resetForm = () => {
+    form.reset();
+    const colorInputs = document.querySelectorAll(".color-input");
+    colorInputs.forEach((input, index) => {
+      if (index > 0) input.remove(); // Elimina los colores adicionales
+    });
+    initialColorCircle.style.backgroundColor = "#000000"; // Resetear al color negro por defecto
+  };
+
   // Generar QR y manejar la respuesta
   document.getElementById("qr-form").addEventListener("submit", async (e) => {
     e.preventDefault();
-
+  
+    // Mostrar el spinner
+    document.getElementById("loading-spinner").style.display = "block";
+  
     const formData = new FormData(e.target);
     const colorInputs = document.querySelectorAll("input[name='colors[]']");
     const colors = Array.from(colorInputs).map((input) => input.value);
-
-    formData.append("color", colors.join(",")); // Agregar colores al formulario
-
-    const response = await fetch("/generate", { method: "POST", body: formData });
-    const result = await response.json();
-
-    if (result.status === "success") {
-      showModal(result.qr_image, result.qr_image.replace(".png", ".svg"));
-    } else {
-      alert(`Error: ${result.message}`);
+  
+    formData.append("color", colors.join(","));
+  
+    try {
+      const response = await fetch("/generate", { method: "POST", body: formData });
+      const result = await response.json();
+  
+      if (result.status === "success") {
+        showModal(result.qr_image, result.qr_svg);
+      } else {
+        alert(`Error: ${result.message}`);
+      }
+    } catch (error) {
+      alert("Error al generar el QR. Intenta nuevamente.");
+    } finally {
+      // Ocultar el spinner
+      document.getElementById("loading-spinner").style.display = "none";
     }
-  });
+  });  
 });

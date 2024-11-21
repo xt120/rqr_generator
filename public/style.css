@@ -1,7 +1,7 @@
 /* Estilo general */
 body {
   font-family: 'Poppins', Arial, sans-serif;
-  background: radial-gradient(circle at center, #0a0f36, #020617, #000000); /* Fondo tipo galaxia */
+  background: #121212; /* Fondo oscuro general */
   color: #e2e8f0; /* Texto claro */
   margin: 0;
   padding: 0;
@@ -9,37 +9,37 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  overflow: hidden;
   position: relative;
 }
 
-/* Animación de estrellas (capa superior) */
-body::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(2px, rgba(255, 255, 255, 0.8), transparent 40%);
-  background-size: 3px 3px;
-  opacity: 0.3;
-  animation: starMovement 30s linear infinite; /* Movimiento lento de estrellas */
-  z-index: 0;
+/* Fondo con diseño de cuadrados */
+#background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #121212;
+  background-image: repeating-linear-gradient(
+    45deg,
+    #1e1e1e 0,
+    #1e1e1e 25%,
+    #121212 25%,
+    #121212 50%
+  );
+  background-size: 20px 20px; /* Tamaño del patrón */
+  z-index: -1;
 }
 
 /* Contenedor principal */
 .container {
-  background: linear-gradient(145deg, #3b82f6, #9333ea); /* Degradado azul a púrpura */
+  background: linear-gradient(145deg, #3b82f6, #9333ea); /* Fondo degradado */
   padding: 30px 40px;
   border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 30px rgba(147, 51, 234, 0.8); /* Sombras intensas */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 30px rgba(147, 51, 234, 0.8);
   text-align: center;
-  position: relative;
-  z-index: 1; /* Sobre las estrellas */
   width: 100%;
   max-width: 400px;
-  animation: glow 3s infinite alternate; /* Animación de brillo */
 }
 
 /* Título */
@@ -49,7 +49,7 @@ body::before {
   color: #ffffff; /* Blanco puro */
   font-weight: bold;
   letter-spacing: 1.5px;
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px #9333ea; /* Brillo del texto */
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px #9333ea;
 }
 
 /* Formularios */
@@ -63,27 +63,23 @@ label {
   font-weight: bold;
   text-align: left;
   margin-bottom: 5px;
-  color: #a5b4fc; /* Azul claro */
+  color: #a5b4fc;
   text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
 input[type="text"], input[type="file"], input[type="color"] {
   padding: 12px;
   font-size: 16px;
-  background: #1e293b; /* Fondo oscuro */
-  color: #e2e8f0; /* Texto claro */
-  border: 1px solid #3b82f6; /* Azul brillante */
+  background: #1e293b;
+  color: #e2e8f0;
+  border: 1px solid #3b82f6;
   border-radius: 8px;
   outline: none;
   transition: all 0.3s ease-in-out;
 }
 
-input[type="text"]::placeholder {
-  color: #64748b; /* Gris claro */
-}
-
 input[type="text"]:focus, input[type="color"]:focus {
-  border-color: #9333ea; /* Púrpura brillante */
+  border-color: #9333ea;
   box-shadow: 0 0 10px rgba(147, 51, 234, 0.8);
 }
 
@@ -91,90 +87,54 @@ input[type="text"]:focus, input[type="color"]:focus {
 button {
   padding: 12px;
   font-size: 18px;
-  background: linear-gradient(90deg, #9333ea, #3b82f6); /* Degradado púrpura a azul */
+  background: linear-gradient(90deg, #9333ea, #3b82f6);
   color: white;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  box-shadow: 0 0 15px rgba(59, 130, 246, 0.8), 0 0 20px rgba(147, 51, 234, 0.8); /* Brillo del botón */
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.8), 0 0 20px rgba(147, 51, 234, 0.8);
 }
 
 button:hover {
-  background: linear-gradient(90deg, #3b82f6, #9333ea); /* Invertir el degradado */
+  background: linear-gradient(90deg, #3b82f6, #9333ea);
   transform: scale(1.1);
-  box-shadow: 0 0 20px rgba(59, 130, 246, 1), 0 0 30px rgba(147, 51, 234, 1); /* Más brillo */
+  box-shadow: 0 0 20px rgba(59, 130, 246, 1), 0 0 30px rgba(147, 51, 234, 1);
 }
 
-/* Contenedor de colores */
-#color-picker-container {
+/* Spinner (indicador de carga) */
+.spinner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
-  position: relative;
-}
-
-/* Círculo de color */
-.color-input .color-circle {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%; /* Hacerlo circular */
-  cursor: pointer;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5), 0 0 10px rgba(147, 51, 234, 0.5); /* Efecto brillante */
-  transition: transform 0.2s ease, box-shadow 0.3s ease-in-out, background-color 0.3s ease;
-}
-
-.color-input .color-circle:hover {
-  transform: scale(1.1); /* Ampliar ligeramente */
-  box-shadow: 0 0 10px rgba(59, 130, 246, 1), 0 0 15px rgba(147, 51, 234, 1);
-}
-
-/* Ocultar el input[type="color"] real */
-.color-input input[type="color"] {
-  display: none; /* Ocultar el input */
-}
-
-/* Botón para agregar colores */
-button#add-color {
-  width: 50px;
-  height: 50px;
-  background: linear-gradient(145deg, #9333ea, #3b82f6); /* Degradado púrpura a azul */
-  color: white;
-  font-size: 24px;
-  font-weight: bold;
-  border: none;
-  border-radius: 50%; /* Botón circular */
-  box-shadow: 0 0 10px rgba(59, 130, 246, 0.8), 0 0 20px rgba(147, 51, 234, 0.8);
-  cursor: pointer;
-  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 1000;
+  color: white;
 }
 
-button#add-color:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 15px rgba(59, 130, 246, 1), 0 0 25px rgba(147, 51, 234, 1);
+.spinner-icon {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255, 255, 255, 0.2);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
 }
 
-
-/* Resultado del QR */
-#qr-result {
-  margin-top: 20px;
-  display: none;
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
-
-#qr-result img {
-  width: 220px;
-  height: 220px;
-  margin-top: 10px;
-  border: 2px solid #3b82f6; /* Borde azul brillante */
-  border-radius: 15px;
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.8), 0 0 30px rgba(147, 51, 234, 0.8); /* Efecto de luz */
-}
-
 
 /* Modal estilos */
 .modal {
@@ -185,7 +145,6 @@ button#add-color:hover {
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
   background-color: rgba(0, 0, 0, 0.7);
   justify-content: center;
   align-items: center;
@@ -193,51 +152,10 @@ button#add-color:hover {
 
 .modal-content {
   background-color: #1e293b;
-  margin: auto;
   padding: 20px;
-  border: 2px solid #3b82f6;
   border-radius: 10px;
-  width: 80%;
+  width: 90%;
   max-width: 500px;
   text-align: center;
   color: white;
-}
-
-.close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: #ffffff;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.download-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.download-buttons a.button {
-  padding: 10px 20px;
-  background: linear-gradient(145deg, #9333ea, #3b82f6);
-  color: white;
-  text-decoration: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  margin: 0 5px;
-  display: inline-block;
-  text-align: center;
-}
-
-.download-buttons a.button:hover {
-  transform: scale(1.1);
-  background: linear-gradient(145deg, #3b82f6, #9333ea);
 }
