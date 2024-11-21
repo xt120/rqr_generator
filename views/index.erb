@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generador de QR</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div id="galaxy-background"></div>
+  <div class="container">
+    <h1>Generador de Códigos QR</h1>
+    <form id="qr-form">
+      <label for="content">Texto o enlace:</label>
+      <input type="text" id="content" name="content" required>
+
+      <label for="color-picker-container">Colores del QR:</label>
+      <div id="color-picker-container">
+        <div class="color-input">
+          <div class="color-circle" style="background-color: #000000;"></div>
+          <input type="color" name="colors[]" value="#000000" hidden>
+        </div>
+        <button type="button" id="add-color">+</button>
+      </div>
+
+      <label for="logo">Logo (opcional):</label>
+      <input type="file" id="logo" name="logo">
+
+      <button type="submit">Generar QR</button>
+    </form>
+  </div>
+
+  <!-- Modal para mostrar el QR -->
+  <div id="qr-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Tu código QR</h2>
+      <img id="qr-image-modal" src="" alt="Código QR">
+      <div class="download-buttons">
+        <a id="download-png" class="button">Descargar PNG</a>
+        <a id="download-svg" class="button">Descargar SVG</a>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="/script.js"></script>
+</body>
+</html>
