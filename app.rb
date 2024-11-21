@@ -2,6 +2,8 @@ require 'sinatra'
 require 'rqrcode'
 require 'chunky_png'
 
+set :port, ENV['PORT'] || 4567 # Usa $PORT en producción, o 4567 en local
+
 get '/' do
   erb :index
 end
