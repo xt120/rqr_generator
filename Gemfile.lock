@@ -7,6 +7,7 @@ GEM
     mustermann (3.0.3)
       ruby2_keywords (~> 0.0.1)
     nio4r (2.7.4)
+    ostruct (0.6.1)
     puma (6.4.3)
       nio4r (~> 2.0)
     rack (3.1.8)
@@ -38,6 +39,7 @@ PLATFORMS
 
 DEPENDENCIES
   chunky_png
+  ostruct
   puma
   rackup
   rqrcode

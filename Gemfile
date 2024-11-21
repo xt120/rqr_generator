@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 
 gem 'sinatra'
 gem 'chunky_png'
+gem 'ostruct'
 gem 'puma'
 gem 'rackup'
 gem 'rqrcode'
