@@ -3,6 +3,7 @@ require 'rqrcode'
 require 'chunky_png'
 
 set :port, ENV['PORT'] || 4567 # Usa $PORT en producción, o 4567 en local
+set :bind, '0.0.0.0'
 
 get '/' do
   erb :index
